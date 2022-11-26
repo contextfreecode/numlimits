@@ -1,10 +1,10 @@
 #include <locale>
 #include <iostream>
-#include <string>
+#include <string_view>
 #include <vector>
 
 struct Country {
-    std::string name;
+    std::string_view name;
     int population;
 };
 
