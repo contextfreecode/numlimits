@@ -35,3 +35,5 @@ auto main() -> int {
 // [1] See https://stackoverflow.com/a/46364980/2748187
 // [2] See https://en.cppreference.com/w/cpp/language/operator_arithmetic#Overflows
 // [3] See https://thephd.dev/c-the-improvements-june-september-virtual-c-meeting#n2683---towards-integer-safety
+// [4] https://softwareengineering.stackexchange.com/q/274231
+// [5] https://blog.trailofbits.com/2019/11/27/64-bits-ought-to-be-enough-for-anybody/
