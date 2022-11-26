@@ -1,30 +1,30 @@
 use num_format::{Locale, ToFormattedString, WriteFormatted};
 use std::fmt;
 
-struct Country {
-    name: String,
+struct Country<'a> {
+    name: &'a str,
     population: i32,
 }
 
+const COUNTRIES: &[Country] = &[
+    Country { name: "China", population: 1_412_600_000 },
+    Country { name: "India", population: 1_375_586_000 },
+];
+
 fn main() {
-    let countries: &[Country] = &[Country {
-        name: "China".into(),
-        population: 1_412_600_000,
-    }];
-    // let mut stdout = std::io::stdout();
-    // let locale = &Locale::en;
-    for country in countries {
-        println!("{} {}", country.name, Sep(country.population));
-        // stdout.write_formatted(&country.population, locale).unwrap();
-        // println!();
+    let mut total = 0;
+    for country in COUNTRIES {
+        println!("{} {}", country.name, IntSep(country.population));
+        total += country.population;
     }
+    println!("total {}", IntSep(total));
 }
 
-struct Sep<N>(N)
+struct IntSep<N>(N)
 where
     N: ToFormattedString;
 
-impl<N> fmt::Display for Sep<N>
+impl<N> fmt::Display for IntSep<N>
 where
     N: ToFormattedString,
 {
