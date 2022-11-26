@@ -9,6 +9,14 @@ struct Country<'a> {
 const COUNTRIES: &[Country] = &[
     Country { name: "China", population: 1_412_600_000 },
     Country { name: "India", population: 1_375_586_000 },
+    Country { name: "United States", population: 333_299_945 },
+    Country { name: "Indonesia", population: 275_773_800 },
+    Country { name: "Pakistan", population: 235_825_000 },
+    Country { name: "Nigeria", population: 218_541_000 },
+    Country { name: "Brazil", population: 215_424_390 },
+    Country { name: "Bangladesh", population: 165_158_616 },
+    Country { name: "Russia", population: 145_100_000 },
+    Country { name: "Mexico", population: 128_533_664 },
 ];
 
 fn main() {
