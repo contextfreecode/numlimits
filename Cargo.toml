@@ -5,6 +5,7 @@ authors = ["Tom <tom@contextfree.info>"]
 edition = "2021"
 
 [dependencies]
+num-format = "0.4.3"
 
 [[bin]]
 name = "lim"
