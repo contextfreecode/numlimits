@@ -23,9 +23,9 @@ def main
 end
 
 def format_int(n)
-  n.to_s.reverse.gsub(/...(?=.)/, '\&,').reverse # [1]
+  n.to_s.reverse.gsub(/...(?=[^-])/, '\&,').reverse # [1]
 end
 
 main
 
-# [1] From https://stackoverflow.com/a/6459020/2748187
+# [1] Changed from https://stackoverflow.com/a/6459020/2748187
