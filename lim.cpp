@@ -3,6 +3,15 @@
 #include <string_view>
 #include <vector>
 
+struct IntSep: std::numpunct<char> {
+    auto do_thousands_sep() const -> char override { return '_'; }
+    auto do_grouping() const -> std::string override { return "\3"; }
+    static auto instance() -> const IntSep* {
+        static IntSep instance;
+        return &instance;
+    }
+};
+
 struct Country {
     std::string_view name;
     int population;
@@ -23,7 +32,8 @@ const auto countries = std::vector<Country> {
 };
 
 auto main() -> int {
-    std::cout.imbue(std::locale("")); // [1]
+    // std::cout.imbue(std::locale(std::cout.getloc(), IntSep::instance()));
+    std::cout.imbue(std::locale("")); // [6]
     auto total = 0;
     for (auto& country: countries) {
         std::cout << country.name << " " << country.population << "\n";
@@ -32,8 +42,9 @@ auto main() -> int {
     std::cout << "total " << total << "\n";
 }
 
-// [1] See https://stackoverflow.com/a/46364980/2748187
-// [2] See https://en.cppreference.com/w/cpp/language/operator_arithmetic#Overflows
-// [3] See https://thephd.dev/c-the-improvements-june-september-virtual-c-meeting#n2683---towards-integer-safety
+// [1] https://en.cppreference.com/w/cpp/locale/numpunct/grouping
+// [2] https://en.cppreference.com/w/cpp/language/operator_arithmetic#Overflows
+// [3] https://thephd.dev/c-the-improvements-june-september-virtual-c-meeting#n2683---towards-integer-safety
 // [4] https://softwareengineering.stackexchange.com/q/274231
 // [5] https://blog.trailofbits.com/2019/11/27/64-bits-ought-to-be-enough-for-anybody/
+// [6] See https://stackoverflow.com/a/46364980/2748187
