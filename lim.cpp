@@ -32,8 +32,7 @@ const auto countries = std::vector<Country> {
 };
 
 auto main() -> int {
-    // std::cout.imbue(std::locale(std::cout.getloc(), IntSep::instance()));
-    std::cout.imbue(std::locale("")); // [6]
+    std::cout.imbue(std::locale(std::cout.getloc(), IntSep::instance()));
     auto total = 0;
     for (auto& country: countries) {
         std::cout << country.name << " " << country.population << "\n";

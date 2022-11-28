@@ -42,7 +42,7 @@ actor Main
     var count: I32 = 0
     for rune in Format.int[N](n).reverse().runes() do
       if ((count % 3) == 0) and (count > 0) and (rune != '-') then
-        result.push(',')
+        result.push('_')
       end
       result.push_utf32(rune)
       count = count + 1

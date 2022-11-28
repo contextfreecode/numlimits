@@ -1,4 +1,4 @@
-use num_format::{Locale, ToFormattedString, WriteFormatted};
+use num_format::{CustomFormat, ToFormattedString, WriteFormatted};
 use std::fmt;
 
 struct Country<'a> {
@@ -20,24 +20,25 @@ const COUNTRIES: &[Country] = &[
 ];
 
 fn main() {
+    let format = CustomFormat::builder().separator("_").build().unwrap();
     let mut total = 0;
     for country in COUNTRIES {
-        println!("{} {}", country.name, IntSep(country.population));
+        println!("{} {}", country.name, IntSep(country.population, &format));
         total += country.population;
     }
-    println!("total {}", IntSep(total));
+    println!("total {}", IntSep(total, &format));
 }
 
-struct IntSep<N>(N)
+struct IntSep<'a, N>(N, &'a CustomFormat)
 where
     N: ToFormattedString;
 
-impl<N> fmt::Display for IntSep<N>
+impl<'a, N> fmt::Display for IntSep<'a, N>
 where
     N: ToFormattedString,
 {
     fn fmt(&self, mut formatter: &mut fmt::Formatter) -> fmt::Result {
-        formatter.write_formatted(&self.0, &Locale::en).unwrap();
+        formatter.write_formatted(&self.0, self.1).unwrap();
         Ok(())
     }
 }

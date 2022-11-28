@@ -29,7 +29,7 @@ pub fn main() void {
     print("total {}\n", .{fmtIntSep(total)});
 }
 
-fn fmtIntSep(n: anytype) FmtIntSep {
+fn fmtIntSep(n: anytype) FmtIntSep { // [1]
     return .{
         .n = std.math.absCast(n),
         .negative = n < 0,
@@ -69,8 +69,10 @@ const FmtIntSep = struct {
             digits -= 1;
             try writer.writeByte('0' + @intCast(u8, self.n / exp % 10));
             if (digits > 0 and digits % 3 == 0) {
-                try writer.writeByte(',');
+                try writer.writeByte('_');
             }
         }
     }
 };
+
+// [1] From squirl and InKryption.
